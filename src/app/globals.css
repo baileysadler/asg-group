@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-charcoal: #1A1A2E;
+  --color-charcoal-light: #242442;
+  --color-orange: #FF6B35;
+  --color-orange-dark: #E55A2B;
+  --color-slate: #4A5568;
+  --color-slate-light: #718096;
+  --color-off-white: #F7F8FA;
+  --color-border: #E2E8F0;
+  --font-sans: var(--font-inter);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #ffffff;
+  color: #1A1A2E;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Smooth section transitions */
+section {
+  position: relative;
+}
+
+/* Video overlay gradient */
+.hero-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(26, 26, 46, 0.65) 0%,
+    rgba(26, 26, 46, 0.45) 40%,
+    rgba(26, 26, 46, 0.75) 100%
+  );
+}
+
+/* Service card hover */
+.service-card {
+  transition: all 0.4s cubic-bezier(0.25, 0.4, 0.25, 1);
+}
+
+.service-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* Orange accent underline */
+.accent-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.accent-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: #FF6B35;
+}
+
+/* Logo grid */
+.client-logo {
+  filter: grayscale(100%);
+  opacity: 0.6;
+  transition: all 0.4s cubic-bezier(0.25, 0.4, 0.25, 1);
+}
+
+.client-logo:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+/* Smooth page transitions */
+main {
+  min-height: 100vh;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F7F8FA;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E0;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #718096;
+}
+
+/* Selection highlight */
+::selection {
+  background: rgba(255, 107, 53, 0.2);
+  color: #1A1A2E;
+}
+
+/* Focus ring */
+*:focus-visible {
+  outline: 2px solid #FF6B35;
+  outline-offset: 2px;
+}
+
+/* Smooth link transitions */
+a {
+  transition: color 0.2s ease;
+}
