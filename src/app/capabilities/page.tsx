@@ -3,18 +3,18 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-  ArrowRight,
-  Pen,
-  Flame,
-  Zap,
-  CircleDot,
+  PenNib,
+  Fire,
+  Lightning,
+  CircleNotch,
   Gauge,
   Syringe,
-  Layers,
-  Paintbrush,
+  Stack,
+  PaintBrush,
   Package,
   CheckCircle,
-} from "lucide-react";
+  ArrowRight,
+} from "@phosphor-icons/react";
 import {
   FadeIn,
   SlideIn,
@@ -23,10 +23,12 @@ import {
   MagneticHover,
 } from "@/components/animations";
 
+const ease = [0.32, 0.72, 0, 1] as const;
+
 const capabilities = [
   {
     id: "design",
-    icon: Pen,
+    icon: PenNib,
     title: "Design & Development",
     subtitle: "Concept to Delivery",
     desc: "From initial concept right through to final delivery, we manage every stage of the design and development process.",
@@ -42,7 +44,7 @@ const capabilities = [
   },
   {
     id: "fabrication",
-    icon: Flame,
+    icon: Fire,
     title: "Fabrication",
     subtitle: "Steel, Stainless & Aluminium",
     desc: "Expert fabrication services specialising in small and medium scale runs of fabricated parts, products and sub-assemblies with quality, versatility and value.",
@@ -57,7 +59,7 @@ const capabilities = [
   },
   {
     id: "laser",
-    icon: Zap,
+    icon: Lightning,
     title: "Advanced Laser Cutting",
     subtitle: "24hr Unmanned Operation",
     desc: "At the forefront of UK manufacturing in advanced laser tube cutting technology, supporting both small batches and large production runs.",
@@ -74,7 +76,7 @@ const capabilities = [
   },
   {
     id: "cnc",
-    icon: CircleDot,
+    icon: CircleNotch,
     title: "CNC Tube Manipulation",
     subtitle: "Precision Tube Forming",
     desc: "State-of-the-art tube forming with the widest range of tube manipulation and forming options, with extensive in-house tooling.",
@@ -120,7 +122,7 @@ const capabilities = [
   },
   {
     id: "vacuum",
-    icon: Layers,
+    icon: Stack,
     title: "Thermoplastic Vacuum Forming",
     subtitle: "Via Ansini (Est. 1992)",
     desc: "Specialist vacuum forming and thermoplastic moulding solutions through our associate company Ansini, serving aerospace, automotive, medical and more.",
@@ -136,7 +138,7 @@ const capabilities = [
   },
   {
     id: "finishing",
-    icon: Paintbrush,
+    icon: PaintBrush,
     title: "Product Finishing",
     subtitle: "In-House & Partner Services",
     desc: "A reliable single point of contact for finishing your products, using in-house processes and specialist finishes by trusted partners.",
@@ -174,30 +176,30 @@ export default function CapabilitiesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-charcoal py-32 md:py-40 mt-20">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="bg-[#0C0C1D] py-36 md:py-44 mt-28">
+        <div className="max-w-[1400px] mx-auto px-8">
           <div className="max-w-3xl">
-            <motion.h2
+            <motion.span
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-sm font-semibold text-orange uppercase tracking-widest mb-4"
+              transition={{ duration: 0.6, ease }}
+              className="eyebrow"
             >
               Our Capabilities
-            </motion.h2>
+            </motion.span>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-4xl md:text-6xl font-bold text-white leading-tight"
+              transition={{ duration: 0.8, delay: 0.2, ease }}
+              className="text-4xl md:text-6xl font-bold text-white leading-tight tracking-tighter mt-5"
             >
               9 Manufacturing Capabilities. One Facility.
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-slate-light text-lg mt-6 leading-relaxed"
+              transition={{ duration: 0.8, delay: 0.4, ease }}
+              className="text-[#52556A] text-lg mt-6 leading-relaxed max-w-2xl"
             >
               Full in-house capability from our 5,000m² facility in Derby —
               design, fabrication, laser cutting, CNC, moulding, finishing, and
@@ -213,64 +215,84 @@ export default function CapabilitiesPage() {
           <section
             key={cap.id}
             id={cap.id}
-            className={`py-20 md:py-28 scroll-mt-32 ${
-              i % 2 === 1 ? "bg-off-white" : ""
+            className={`py-28 md:py-36 scroll-mt-32 ${
+              i % 2 === 1 ? "bg-[#F4F5F7]" : "bg-[#FAFAFA]"
             }`}
           >
-            <div className="max-w-7xl mx-auto px-6">
-              <div className="grid lg:grid-cols-2 gap-16 items-start">
-                <SlideIn direction={i % 2 === 0 ? "left" : "right"} className={i % 2 === 1 ? "lg:order-2" : ""}>
-                  <div className="flex items-center gap-4 mb-6">
+            <div className="max-w-[1400px] mx-auto px-8">
+              <div className="grid lg:grid-cols-2 gap-20 items-start">
+                {/* Content side */}
+                <SlideIn
+                  direction={i % 2 === 0 ? "left" : "right"}
+                  className={i % 2 === 1 ? "lg:order-2" : ""}
+                >
+                  <div className="flex items-center gap-5 mb-8">
                     <motion.div
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      className="w-14 h-14 bg-orange/10 rounded-xl flex items-center justify-center"
+                      whileHover={{ scale: 1.08, rotate: 4 }}
+                      transition={{ duration: 0.4, ease }}
+                      className="w-16 h-16 bg-[#E8552D]/8 rounded-2xl flex items-center justify-center"
                     >
-                      <cap.icon className="text-orange" size={28} />
+                      <cap.icon
+                        className="text-[#E8552D]"
+                        size={30}
+                        weight="light"
+                      />
                     </motion.div>
                     <div>
-                      <h3 className="text-2xl md:text-3xl font-bold text-charcoal">
+                      <h3 className="text-2xl md:text-3xl font-bold text-[#0C0C1D] tracking-tighter">
                         {cap.title}
                       </h3>
-                      <p className="text-orange font-medium text-sm">
+                      <p className="text-[#E8552D] font-medium text-sm mt-0.5">
                         {cap.subtitle}
                       </p>
                     </div>
                   </div>
-                  <p className="text-slate leading-relaxed text-lg mb-8">
+                  <p className="text-[#52556A] leading-relaxed text-lg mb-10">
                     {cap.desc}
                   </p>
-                  <motion.div whileHover={{ x: 4 }} className="inline-block">
+                  <MagneticHover className="inline-block">
                     <Link
                       href="/contact"
-                      className="text-orange font-semibold hover:underline inline-flex items-center gap-2"
+                      className="bg-[#E8552D] hover:bg-[#d14a26] text-white font-semibold pl-7 pr-5 py-3 rounded-full text-sm transition-colors inline-flex items-center gap-3"
                     >
                       Enquire About {cap.title}
-                      <ArrowRight size={16} />
+                      <span className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+                        <ArrowRight size={16} weight="light" />
+                      </span>
                     </Link>
-                  </motion.div>
+                  </MagneticHover>
                 </SlideIn>
-                <SlideIn direction={i % 2 === 0 ? "right" : "left"} className={i % 2 === 1 ? "lg:order-1" : ""}>
-                  <div
-                    className={`rounded-2xl p-8 ${
-                      i % 2 === 1 ? "bg-white" : "bg-off-white"
-                    }`}
-                  >
-                    <h4 className="font-bold text-charcoal mb-4 text-sm uppercase tracking-wider">
-                      Key Features
-                    </h4>
-                    <StaggerContainer className="space-y-3" staggerDelay={0.06}>
-                      {cap.details.map((detail) => (
-                        <StaggerItem key={detail}>
-                          <div className="flex items-start gap-3">
-                            <CheckCircle
-                              className="text-orange shrink-0 mt-0.5"
-                              size={18}
-                            />
-                            <span className="text-slate text-sm">{detail}</span>
-                          </div>
-                        </StaggerItem>
-                      ))}
-                    </StaggerContainer>
+
+                {/* Details card side */}
+                <SlideIn
+                  direction={i % 2 === 0 ? "right" : "left"}
+                  className={i % 2 === 1 ? "lg:order-1" : ""}
+                >
+                  <div className="card-shell">
+                    <div className="card-core">
+                      <h4 className="font-bold text-[#0C0C1D] mb-6 text-xs uppercase tracking-widest">
+                        Key Features
+                      </h4>
+                      <StaggerContainer
+                        className="divide-y divide-border"
+                        staggerDelay={0.06}
+                      >
+                        {cap.details.map((detail) => (
+                          <StaggerItem key={detail}>
+                            <div className="flex items-start gap-3 py-3 first:pt-0 last:pb-0">
+                              <CheckCircle
+                                className="text-[#E8552D] shrink-0 mt-0.5"
+                                size={18}
+                                weight="light"
+                              />
+                              <span className="text-[#52556A] text-sm leading-relaxed">
+                                {detail}
+                              </span>
+                            </div>
+                          </StaggerItem>
+                        ))}
+                      </StaggerContainer>
+                    </div>
                   </div>
                 </SlideIn>
               </div>
@@ -280,23 +302,26 @@ export default function CapabilitiesPage() {
       </div>
 
       {/* CTA */}
-      <section className="bg-charcoal py-20">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+      <section className="bg-[#0C0C1D] py-28 md:py-36">
+        <div className="max-w-[1400px] mx-auto px-8 text-center">
           <FadeIn>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            <span className="eyebrow">Get Started</span>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 mt-5 tracking-tighter">
               Need Multiple Capabilities?
             </h2>
-            <p className="text-slate-light text-lg mb-8">
+            <p className="text-[#52556A] text-lg mb-10 max-w-2xl mx-auto leading-relaxed">
               Our single-site strategy means all 9 capabilities under one roof —
               giving you focus, flexibility, and cost control.
             </p>
             <MagneticHover className="inline-block">
               <Link
                 href="/contact"
-                className="bg-orange hover:bg-orange-dark text-white font-semibold px-8 py-4 rounded-lg text-lg transition-colors inline-flex items-center gap-2"
+                className="bg-[#E8552D] hover:bg-[#d14a26] text-white font-semibold pl-8 pr-6 py-4 rounded-full text-lg transition-colors inline-flex items-center gap-3"
               >
                 Start Your Project
-                <ArrowRight size={20} />
+                <span className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                  <ArrowRight size={20} weight="light" />
+                </span>
               </Link>
             </MagneticHover>
           </FadeIn>

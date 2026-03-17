@@ -1,53 +1,54 @@
+"use client";
+
 import Link from "next/link";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Envelope, MapPin } from "@phosphor-icons/react";
 
 export function Footer() {
   return (
     <footer className="bg-charcoal text-white">
-      {/* Main footer */}
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div className="max-w-[1400px] mx-auto px-8 py-20">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-16">
           {/* Company info */}
           <div>
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 bg-orange rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">A</span>
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-9 h-9 bg-orange rounded-[10px] flex items-center justify-center">
+                <span className="text-white font-bold text-sm tracking-tight">ASG</span>
               </div>
-              <span className="font-bold text-xl">ASG Group</span>
+              <span className="font-bold text-lg tracking-tight">ASG Group</span>
             </div>
-            <p className="text-slate-light text-sm leading-relaxed mb-6">
+            <p className="text-white/40 text-sm leading-relaxed mb-8 max-w-[280px]">
               Family-owned manufacturing & engineering company delivering
               quality engineering services for over 26 years from our 5,000m²
               facility in Derby, UK.
             </p>
-            <div className="space-y-3">
+            <div className="space-y-4">
               <a
                 href="tel:+441332753333"
-                className="flex items-center gap-3 text-sm text-slate-light hover:text-orange transition-colors"
+                className="flex items-center gap-3 text-sm text-white/40 hover:text-orange transition-premium"
               >
-                <Phone size={16} />
+                <Phone size={15} weight="light" />
                 +44 (0) 1332 753 333
               </a>
               <a
                 href="mailto:info@asg-group.co.uk"
-                className="flex items-center gap-3 text-sm text-slate-light hover:text-orange transition-colors"
+                className="flex items-center gap-3 text-sm text-white/40 hover:text-orange transition-premium"
               >
-                <Mail size={16} />
+                <Envelope size={15} weight="light" />
                 info@asg-group.co.uk
               </a>
-              <div className="flex items-start gap-3 text-sm text-slate-light">
-                <MapPin size={16} className="mt-0.5 shrink-0" />
-                997 London Road, Derby, Derbyshire, DE24 8PX, UK
+              <div className="flex items-start gap-3 text-sm text-white/40">
+                <MapPin size={15} weight="light" className="mt-0.5 shrink-0" />
+                997 London Road, Derby, DE24 8PX
               </div>
             </div>
           </div>
 
           {/* Capabilities */}
           <div>
-            <h3 className="font-semibold text-sm uppercase tracking-wider mb-6">
+            <h3 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/30 mb-8">
               Capabilities
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-3.5">
               {[
                 "Design & Development",
                 "Fabrication",
@@ -62,7 +63,7 @@ export function Footer() {
                 <li key={item}>
                   <Link
                     href="/capabilities"
-                    className="text-sm text-slate-light hover:text-orange transition-colors"
+                    className="text-sm text-white/40 hover:text-orange transition-premium"
                   >
                     {item}
                   </Link>
@@ -71,12 +72,12 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Products */}
+          {/* Products + Company */}
           <div>
-            <h3 className="font-semibold text-sm uppercase tracking-wider mb-6">
+            <h3 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/30 mb-8">
               Products
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-3.5">
               {[
                 "Dog Guards & Cargo Dividers",
                 "Side Steps",
@@ -86,7 +87,7 @@ export function Footer() {
                 <li key={item}>
                   <Link
                     href="/products"
-                    className="text-sm text-slate-light hover:text-orange transition-colors"
+                    className="text-sm text-white/40 hover:text-orange transition-premium"
                   >
                     {item}
                   </Link>
@@ -94,10 +95,10 @@ export function Footer() {
               ))}
             </ul>
 
-            <h3 className="font-semibold text-sm uppercase tracking-wider mb-6 mt-10">
+            <h3 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/30 mb-8 mt-12">
               Company
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-3.5">
               {[
                 { name: "About Us", href: "/about" },
                 { name: "Our Clients", href: "/clients" },
@@ -108,7 +109,7 @@ export function Footer() {
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className="text-sm text-slate-light hover:text-orange transition-colors"
+                    className="text-sm text-white/40 hover:text-orange transition-premium"
                   >
                     {item.name}
                   </Link>
@@ -119,58 +120,47 @@ export function Footer() {
 
           {/* Certifications */}
           <div>
-            <h3 className="font-semibold text-sm uppercase tracking-wider mb-6">
+            <h3 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/30 mb-8">
               Certifications
             </h3>
             <div className="space-y-4">
               {[
-                {
-                  cert: "ISO 9001",
-                  desc: "Quality Management Systems",
-                },
-                {
-                  cert: "ISO 14001",
-                  desc: "Environmental Management",
-                },
-                {
-                  cert: "IATF 16949",
-                  desc: "Automotive Quality Management",
-                },
+                { cert: "ISO 9001", desc: "Quality Management Systems" },
+                { cert: "ISO 14001", desc: "Environmental Management" },
+                { cert: "IATF 16949", desc: "Automotive Quality Management" },
               ].map((item) => (
                 <div
                   key={item.cert}
-                  className="bg-charcoal-light rounded-lg p-4"
+                  className="bg-white/[0.03] rounded-xl p-4 border border-white/[0.04]"
                 >
                   <div className="font-semibold text-orange text-sm">
                     {item.cert}
                   </div>
-                  <div className="text-slate-light text-xs mt-1">
-                    {item.desc}
-                  </div>
+                  <div className="text-white/30 text-xs mt-1">{item.desc}</div>
                 </div>
               ))}
             </div>
 
-            <div className="mt-8">
-              <h3 className="font-semibold text-sm uppercase tracking-wider mb-4">
+            <div className="mt-10">
+              <h3 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/30 mb-6">
                 Associate Companies
               </h3>
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <a
                   href="https://www.ansini.co.uk"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-sm text-slate-light hover:text-orange transition-colors"
+                  className="block text-sm text-white/40 hover:text-orange transition-premium"
                 >
-                  Ansini Ltd →
+                  Ansini Ltd
                 </a>
                 <a
                   href="https://www.travall.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-sm text-slate-light hover:text-orange transition-colors"
+                  className="block text-sm text-white/40 hover:text-orange transition-premium"
                 >
-                  Travall →
+                  Travall
                 </a>
               </div>
             </div>
@@ -179,12 +169,12 @@ export function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-charcoal-light">
-        <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-slate-light text-xs">
-            © {new Date().getFullYear()} ASG Group Ltd. All rights reserved.
+      <div className="border-t border-white/[0.04]">
+        <div className="max-w-[1400px] mx-auto px-8 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-white/25 text-xs tracking-wide">
+            {new Date().getFullYear()} ASG Group Ltd. All rights reserved.
           </p>
-          <p className="text-slate-light text-xs">
+          <p className="text-white/25 text-xs tracking-wide">
             997 London Road, Derby, Derbyshire, DE24 8PX, United Kingdom
           </p>
         </div>

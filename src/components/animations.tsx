@@ -3,7 +3,10 @@
 import { motion, useInView, useMotionValue, useTransform, useSpring } from "framer-motion";
 import { useRef, useEffect, useState, ReactNode } from "react";
 
-// Fade in from bottom on scroll
+const PREMIUM_EASE = [0.32, 0.72, 0, 1] as const;
+const SPRING_CONFIG = { stiffness: 100, damping: 20 };
+
+// Blur fade-up on scroll (premium entry)
 export function FadeIn({
   children,
   delay = 0,
@@ -19,9 +22,9 @@ export function FadeIn({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-      transition={{ duration: 0.7, delay, ease: [0.25, 0.4, 0.25, 1] }}
+      initial={{ opacity: 0, y: 32, filter: "blur(8px)" }}
+      animate={isInView ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 32, filter: "blur(8px)" }}
+      transition={{ duration: 0.8, delay, ease: PREMIUM_EASE }}
       className={className}
     >
       {children}
@@ -29,7 +32,7 @@ export function FadeIn({
   );
 }
 
-// Fade in from left/right
+// Slide from left/right with blur
 export function SlideIn({
   children,
   direction = "left",
@@ -43,14 +46,14 @@ export function SlideIn({
 }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
-  const x = direction === "left" ? -60 : 60;
+  const x = direction === "left" ? -48 : 48;
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, x }}
-      animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x }}
-      transition={{ duration: 0.7, delay, ease: [0.25, 0.4, 0.25, 1] }}
+      initial={{ opacity: 0, x, filter: "blur(6px)" }}
+      animate={isInView ? { opacity: 1, x: 0, filter: "blur(0px)" } : { opacity: 0, x, filter: "blur(6px)" }}
+      transition={{ duration: 0.8, delay, ease: PREMIUM_EASE }}
       className={className}
     >
       {children}
@@ -74,9 +77,9 @@ export function ScaleIn({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-      transition={{ duration: 0.6, delay, ease: [0.25, 0.4, 0.25, 1] }}
+      initial={{ opacity: 0, scale: 0.92, filter: "blur(6px)" }}
+      animate={isInView ? { opacity: 1, scale: 1, filter: "blur(0px)" } : { opacity: 0, scale: 0.92, filter: "blur(6px)" }}
+      transition={{ duration: 0.7, delay, ease: PREMIUM_EASE }}
       className={className}
     >
       {children}
@@ -88,7 +91,7 @@ export function ScaleIn({
 export function StaggerContainer({
   children,
   className = "",
-  staggerDelay = 0.1,
+  staggerDelay = 0.08,
 }: {
   children: ReactNode;
   className?: string;
@@ -125,11 +128,12 @@ export function StaggerItem({
   return (
     <motion.div
       variants={{
-        hidden: { opacity: 0, y: 30 },
+        hidden: { opacity: 0, y: 24, filter: "blur(6px)" },
         visible: {
           opacity: 1,
           y: 0,
-          transition: { duration: 0.6, ease: [0.25, 0.4, 0.25, 1] },
+          filter: "blur(0px)",
+          transition: { duration: 0.7, ease: PREMIUM_EASE },
         },
       }}
       className={className}
@@ -139,7 +143,7 @@ export function StaggerItem({
   );
 }
 
-// Animated counter for stats
+// Animated counter with spring physics
 export function Counter({
   target,
   suffix = "",
@@ -174,7 +178,7 @@ export function Counter({
   }, [springValue]);
 
   return (
-    <span ref={ref}>
+    <span ref={ref} className="font-mono tabular-nums">
       {prefix}
       {display}
       {suffix}
@@ -182,7 +186,7 @@ export function Counter({
   );
 }
 
-// Magnetic hover effect for buttons/cards
+// Magnetic hover — uses useMotionValue (GPU-safe, no React re-renders)
 export function MagneticHover({
   children,
   className = "",
@@ -199,8 +203,8 @@ export function MagneticHover({
     if (!rect) return;
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
-    x.set((e.clientX - centerX) * 0.15);
-    y.set((e.clientY - centerY) * 0.15);
+    x.set((e.clientX - centerX) * 0.12);
+    y.set((e.clientY - centerY) * 0.12);
   };
 
   const handleLeave = () => {
@@ -208,8 +212,8 @@ export function MagneticHover({
     y.set(0);
   };
 
-  const springX = useSpring(x, { stiffness: 300, damping: 20 });
-  const springY = useSpring(y, { stiffness: 300, damping: 20 });
+  const springX = useSpring(x, SPRING_CONFIG);
+  const springY = useSpring(y, SPRING_CONFIG);
 
   return (
     <motion.div
@@ -224,48 +228,7 @@ export function MagneticHover({
   );
 }
 
-// Parallax scroll effect
-export function Parallax({
-  children,
-  speed = 0.5,
-  className = "",
-}: {
-  children: ReactNode;
-  speed?: number;
-  className?: string;
-}) {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScrollOffset(ref);
-  const y = useTransform(scrollYProgress, [0, 1], [0, speed * 100]);
-
-  return (
-    <motion.div ref={ref} style={{ y }} className={className}>
-      {children}
-    </motion.div>
-  );
-}
-
-function useScrollOffset(ref: React.RefObject<HTMLElement | null>) {
-  const scrollYProgress = useMotionValue(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!ref.current) return;
-      const rect = ref.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const progress = 1 - (rect.top + rect.height) / (windowHeight + rect.height);
-      scrollYProgress.set(Math.max(0, Math.min(1, progress)));
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [ref, scrollYProgress]);
-
-  return { scrollYProgress };
-}
-
-// Text reveal animation
+// Text reveal animation — word by word
 export function TextReveal({
   children,
   className = "",
@@ -282,12 +245,12 @@ export function TextReveal({
       {words.map((word, i) => (
         <motion.span
           key={i}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
+          animate={isInView ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 16, filter: "blur(4px)" }}
           transition={{
             duration: 0.5,
             delay: i * 0.04,
-            ease: [0.25, 0.4, 0.25, 1],
+            ease: PREMIUM_EASE,
           }}
           className="inline-block mr-[0.3em]"
         >
@@ -298,7 +261,7 @@ export function TextReveal({
   );
 }
 
-// Hover card with tilt effect
+// Tilt card — 3D perspective with spring
 export function TiltCard({
   children,
   className = "",
@@ -310,16 +273,16 @@ export function TiltCard({
   const rotateX = useMotionValue(0);
   const rotateY = useMotionValue(0);
 
-  const springRotateX = useSpring(rotateX, { stiffness: 300, damping: 20 });
-  const springRotateY = useSpring(rotateY, { stiffness: 300, damping: 20 });
+  const springRotateX = useSpring(rotateX, SPRING_CONFIG);
+  const springRotateY = useSpring(rotateY, SPRING_CONFIG);
 
   const handleMouse = (e: React.MouseEvent) => {
     const rect = ref.current?.getBoundingClientRect();
     if (!rect) return;
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
-    rotateX.set(y * -10);
-    rotateY.set(x * 10);
+    rotateX.set(y * -8);
+    rotateY.set(x * 8);
   };
 
   const handleLeave = () => {
@@ -333,7 +296,7 @@ export function TiltCard({
       style={{
         rotateX: springRotateX,
         rotateY: springRotateY,
-        transformPerspective: 1000,
+        transformPerspective: 1200,
       }}
       onMouseMove={handleMouse}
       onMouseLeave={handleLeave}
