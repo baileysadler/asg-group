@@ -203,14 +203,9 @@ export default function ClientsPage() {
                     <motion.div
                       whileHover={{ y: -4 }}
                       transition={{ duration: 0.5, ease }}
-                      className="card-core bg-[#0C0C1D] p-10 flex flex-col items-center justify-center gap-4 cursor-default min-h-[120px]"
+                      className="card-core bg-[#0C0C1D] p-10 flex items-center justify-center cursor-default min-h-[120px]"
                     >
-                      <img
-                        src={project.logo}
-                        alt={project.name}
-                        className="max-h-8 max-w-[140px] w-auto object-contain invert"
-                      />
-                      <span className="text-white/60 text-xs font-medium tracking-wider uppercase">
+                      <span className="text-white font-bold text-lg tracking-tighter text-center">
                         {project.name}
                       </span>
                     </motion.div>
