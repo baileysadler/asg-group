@@ -158,27 +158,39 @@ export default function AboutPage() {
               </div>
             </SlideIn>
             <SlideIn direction="right">
-              <div className="bg-off-white rounded-2xl p-10">
-                <div className="grid grid-cols-2 gap-8">
-                  {[
-                    { icon: Clock, value: 26, suffix: "+", label: "Years" },
-                    { icon: Factory, value: 5000, suffix: "", label: "m² Facility" },
-                    { icon: Cog, value: 9, suffix: "", label: "Capabilities" },
-                    { icon: Users, value: 16, suffix: "+", label: "OEM Clients" },
-                  ].map((stat) => (
-                    <div key={stat.label} className="text-center">
-                      <motion.div
-                        whileHover={{ scale: 1.2, rotate: 10 }}
-                        transition={{ type: "spring", stiffness: 300 }}
-                      >
-                        <stat.icon className="text-orange mx-auto mb-3" size={32} />
-                      </motion.div>
-                      <div className="text-3xl font-bold text-charcoal">
-                        <Counter target={stat.value} suffix={stat.suffix} />
+              <div className="relative rounded-2xl overflow-hidden min-h-[500px]">
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover"
+                >
+                  <source src="/video/about-heritage.mp4" type="video/mp4" />
+                </video>
+                <div className="absolute inset-0 bg-charcoal/60" />
+                <div className="relative z-10 p-10 h-full flex flex-col justify-end">
+                  <div className="grid grid-cols-2 gap-8">
+                    {[
+                      { icon: Clock, value: 26, suffix: "+", label: "Years" },
+                      { icon: Factory, value: 5000, suffix: "", label: "m² Facility" },
+                      { icon: Cog, value: 9, suffix: "", label: "Capabilities" },
+                      { icon: Users, value: 16, suffix: "+", label: "OEM Clients" },
+                    ].map((stat) => (
+                      <div key={stat.label} className="text-center">
+                        <motion.div
+                          whileHover={{ scale: 1.2, rotate: 10 }}
+                          transition={{ type: "spring", stiffness: 300 }}
+                        >
+                          <stat.icon className="text-orange mx-auto mb-3" size={32} />
+                        </motion.div>
+                        <div className="text-3xl font-bold text-white">
+                          <Counter target={stat.value} suffix={stat.suffix} />
+                        </div>
+                        <div className="text-gray-300 text-sm mt-1">{stat.label}</div>
                       </div>
-                      <div className="text-slate text-sm mt-1">{stat.label}</div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
             </SlideIn>
