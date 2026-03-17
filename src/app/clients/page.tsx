@@ -203,7 +203,7 @@ export default function ClientsPage() {
                     <motion.div
                       whileHover={{ y: -4 }}
                       transition={{ duration: 0.5, ease }}
-                      className="card-core bg-[#0C0C1D] p-10 flex items-center justify-center cursor-default min-h-[120px]"
+                      className="bg-[#0C0C1D] rounded-[calc(1.5rem-6px)] p-10 flex items-center justify-center cursor-default min-h-[120px]"
                     >
                       <span className="text-white font-bold text-lg tracking-tighter text-center">
                         {project.name}
