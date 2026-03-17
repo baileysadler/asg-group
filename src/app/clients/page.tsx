@@ -12,25 +12,32 @@ import {
 } from "@/components/animations";
 
 const automotiveClients = [
-  { name: "Audi", desc: "Premium vehicle accessories and components", featured: true },
-  { name: "Bentley", desc: "Luxury automotive engineering solutions", featured: true },
-  { name: "Ford", desc: "High-volume manufacturing partnership" },
-  { name: "General Motors", desc: "Global automotive components supply" },
-  { name: "Honda", desc: "Precision-engineered vehicle parts" },
-  { name: "Hyundai", desc: "OEM manufacturing and supply" },
-  { name: "Jaguar", desc: "Premium British automotive partnership", featured: true },
-  { name: "Land Rover", desc: "Off-road and luxury vehicle components", featured: true },
-  { name: "Porsche", desc: "High-performance vehicle accessories" },
-  { name: "Seat", desc: "European automotive manufacturing" },
-  { name: "Skoda", desc: "Vehicle-specific products and accessories" },
-  { name: "Volkswagen", desc: "Large-scale automotive production" },
+  { name: "Audi", desc: "Premium vehicle accessories and components", logo: "/logos/audi.svg", featured: true },
+  { name: "Bentley", desc: "Luxury automotive engineering solutions", logo: "/logos/bentley.svg", featured: true },
+  { name: "Ford", desc: "High-volume manufacturing partnership", logo: "/logos/ford.svg" },
+  { name: "General Motors", desc: "Global automotive components supply", logo: "/logos/general-motors.svg" },
+  { name: "Honda", desc: "Precision-engineered vehicle parts", logo: "/logos/honda.svg" },
+  { name: "Hyundai", desc: "OEM manufacturing and supply", logo: "/logos/hyundai.svg" },
+  { name: "Jaguar", desc: "Premium British automotive partnership", logo: "/logos/jaguar.svg", featured: true },
+  { name: "Land Rover", desc: "Off-road and luxury vehicle components", logo: "/logos/land-rover.svg", featured: true },
+  { name: "Porsche", desc: "High-performance vehicle accessories", logo: "/logos/porsche.svg" },
+  { name: "Seat", desc: "European automotive manufacturing", logo: "/logos/seat.svg" },
+  { name: "Skoda", desc: "Vehicle-specific products and accessories", logo: "/logos/skoda.svg" },
+  { name: "Volkswagen", desc: "Large-scale automotive production", logo: "/logos/volkswagen.svg" },
 ];
 
 const industrialClients = [
-  { name: "Arena Group", desc: "Event infrastructure and temporary structures" },
-  { name: "Load Hog", desc: "Reusable transit packaging solutions" },
-  { name: "Motion Simulation", desc: "Advanced motion simulator frameworks" },
-  { name: "Radius Systems", desc: "Piping and infrastructure systems" },
+  { name: "Arena Group", desc: "Event infrastructure and temporary structures", logo: "/logos/arena-group.svg" },
+  { name: "Load Hog", desc: "Reusable transit packaging solutions", logo: "/logos/load-hog.svg" },
+  { name: "Motion Simulation", desc: "Advanced motion simulator frameworks", logo: "/logos/motion-simulation.svg" },
+  { name: "Radius Systems", desc: "Piping and infrastructure systems", logo: "/logos/radius-systems.svg" },
+];
+
+const notableProjects = [
+  { name: "Silverstone Circuit", logo: "/logos/silverstone.svg" },
+  { name: "Manchester United", logo: "/logos/manchester-united.svg" },
+  { name: "Fulham FC", logo: "/logos/fulham-fc.svg" },
+  { name: "The Queen's Club", logo: "/logos/queens-club.svg" },
 ];
 
 const ease = [0.32, 0.72, 0, 1] as const;
@@ -100,16 +107,14 @@ export default function ClientsPage() {
                   >
                     <div className="card-core p-8 md:p-10 h-full flex flex-col justify-between">
                       <div>
-                        <div className="flex items-center gap-5 mb-5">
-                          <motion.div
-                            whileHover={{ scale: 1.05 }}
-                            transition={{ duration: 0.5, ease }}
-                            className="w-14 h-14 bg-[#0C0C1D] rounded-xl flex items-center justify-center border border-[#0C0C1D]/10"
-                          >
-                            <span className="font-semibold text-white text-xl tracking-tight">
-                              {client.name.charAt(0)}
-                            </span>
-                          </motion.div>
+                        <div className="flex items-center gap-6 mb-5">
+                          <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center shrink-0 p-2.5">
+                            <img
+                              src={client.logo}
+                              alt={client.name}
+                              className="max-h-10 max-w-[48px] w-auto object-contain"
+                            />
+                          </div>
                           <div>
                             <h3 className="text-lg font-bold text-[#0C0C1D] tracking-tighter">
                               {client.name}
@@ -160,15 +165,13 @@ export default function ClientsPage() {
                 <TiltCard className="h-full">
                   <div className={`card-shell h-full ${i === 0 ? "md:min-h-[280px]" : ""}`}>
                     <div className="card-core p-8 md:p-10 h-full flex flex-col">
-                      <motion.div
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.5, ease }}
-                        className="w-14 h-14 bg-[#0C0C1D] rounded-xl flex items-center justify-center border border-[#0C0C1D]/10 mb-5"
-                      >
-                        <span className="font-semibold text-white text-xl tracking-tight">
-                          {client.name.charAt(0)}
-                        </span>
-                      </motion.div>
+                      <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center shrink-0 p-2.5 mb-5">
+                        <img
+                          src={client.logo}
+                          alt={client.name}
+                          className="max-h-10 max-w-[48px] w-auto object-contain"
+                        />
+                      </div>
                       <h3 className="text-lg font-bold text-[#0C0C1D] tracking-tighter">
                         {client.name}
                       </h3>
@@ -194,23 +197,26 @@ export default function ClientsPage() {
             </h3>
           </FadeIn>
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5" staggerDelay={0.1}>
-            {["Silverstone Circuit", "Manchester United", "Fulham FC", "The Queen's Club"].map(
-              (project) => (
-                <StaggerItem key={project}>
+            {notableProjects.map((project) => (
+                <StaggerItem key={project.name}>
                   <div className="card-shell">
                     <motion.div
                       whileHover={{ y: -4 }}
                       transition={{ duration: 0.5, ease }}
-                      className="card-core bg-[#0C0C1D] p-10 text-center cursor-default"
+                      className="card-core bg-[#0C0C1D] p-10 flex flex-col items-center justify-center gap-4 cursor-default min-h-[120px]"
                     >
-                      <span className="text-white font-bold text-lg tracking-tighter">
-                        {project}
+                      <img
+                        src={project.logo}
+                        alt={project.name}
+                        className="max-h-8 max-w-[140px] w-auto object-contain invert"
+                      />
+                      <span className="text-white/60 text-xs font-medium tracking-wider uppercase">
+                        {project.name}
                       </span>
                     </motion.div>
                   </div>
                 </StaggerItem>
-              )
-            )}
+              ))}
           </StaggerContainer>
         </div>
       </section>

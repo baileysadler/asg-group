@@ -85,18 +85,18 @@ const stats = [
 ];
 
 const clients = [
-  "Audi",
-  "Bentley",
-  "Ford",
-  "Honda",
-  "Hyundai",
-  "Jaguar",
-  "Land Rover",
-  "Porsche",
-  "Seat",
-  "Skoda",
-  "Volkswagen",
-  "General Motors",
+  { name: "Audi", logo: "/logos/audi.svg" },
+  { name: "Bentley", logo: "/logos/bentley.svg" },
+  { name: "Ford", logo: "/logos/ford.svg" },
+  { name: "Honda", logo: "/logos/honda.svg" },
+  { name: "Hyundai", logo: "/logos/hyundai.svg" },
+  { name: "Jaguar", logo: "/logos/jaguar.svg" },
+  { name: "Land Rover", logo: "/logos/land-rover.svg" },
+  { name: "Porsche", logo: "/logos/porsche.svg" },
+  { name: "Seat", logo: "/logos/seat.svg" },
+  { name: "Skoda", logo: "/logos/skoda.svg" },
+  { name: "Volkswagen", logo: "/logos/volkswagen.svg" },
+  { name: "General Motors", logo: "/logos/general-motors.svg" },
 ];
 
 const premiumEase = [0.32, 0.72, 0, 1] as const;
@@ -441,16 +441,18 @@ export default function HomePage() {
             staggerDelay={0.06}
           >
             {clients.map((client) => (
-              <StaggerItem key={client}>
+              <StaggerItem key={client.name}>
                 <motion.div
                   whileHover={{ scale: 1.04, y: -4 }}
                   transition={{ type: "spring", stiffness: 400 }}
                   className="client-logo card-shell"
                 >
-                  <div className="card-core flex items-center justify-center h-20 px-4">
-                    <span className="font-bold text-charcoal text-sm text-center">
-                      {client}
-                    </span>
+                  <div className="card-core flex items-center justify-center h-20 px-6">
+                    <img
+                      src={client.logo}
+                      alt={client.name}
+                      className="max-h-10 max-w-[120px] w-auto object-contain"
+                    />
                   </div>
                 </motion.div>
               </StaggerItem>
