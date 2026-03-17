@@ -75,7 +75,7 @@ export default function ProductsPage() {
                   500 vehicle applications available. Distributed globally through
                   our Travall brand, established in 2007.
                 </p>
-                <StaggerContainer className="space-y-3 mb-8" staggerDelay={0.06}>
+                <StaggerContainer className="space-y-5 mb-10" staggerDelay={0.06}>
                   {[
                     "Laser-cut, precision-welded mild steel construction",
                     "Organic-based nylon-powder coating — ultra-tough, scratch-resistant",
@@ -85,13 +85,15 @@ export default function ProductsPage() {
                     "Safety-tested: redirects impact forces toward C-pillar",
                   ].map((feature) => (
                     <StaggerItem key={feature}>
-                      <div className="flex items-start gap-3">
-                        <ShieldCheck
-                          className="text-[#E8552D] shrink-0 mt-0.5"
-                          size={18}
-                          weight="light"
-                        />
-                        <span className="text-[#52556A] text-sm">{feature}</span>
+                      <div className="flex items-start gap-4">
+                        <div className="w-5 h-5 rounded-full bg-[#E8552D]/8 flex items-center justify-center shrink-0 mt-0.5">
+                          <ShieldCheck
+                            className="text-[#E8552D]"
+                            size={12}
+                            weight="fill"
+                          />
+                        </div>
+                        <span className="text-[#52556A] text-sm leading-relaxed">{feature}</span>
                       </div>
                     </StaggerItem>
                   ))}

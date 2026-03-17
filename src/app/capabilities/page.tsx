@@ -269,22 +269,22 @@ export default function CapabilitiesPage() {
                   className={i % 2 === 1 ? "lg:order-1" : ""}
                 >
                   <div className="card-shell">
-                    <div className="card-core">
-                      <h4 className="font-bold text-[#0C0C1D] mb-6 text-xs uppercase tracking-widest">
-                        Key Features
-                      </h4>
+                    <div className="card-core p-8 md:p-10">
+                      <span className="eyebrow mb-8">Key Features</span>
                       <StaggerContainer
-                        className="divide-y divide-border"
+                        className="space-y-5 mt-8"
                         staggerDelay={0.06}
                       >
                         {cap.details.map((detail) => (
                           <StaggerItem key={detail}>
-                            <div className="flex items-start gap-3 py-3 first:pt-0 last:pb-0">
-                              <CheckCircle
-                                className="text-[#E8552D] shrink-0 mt-0.5"
-                                size={18}
-                                weight="light"
-                              />
+                            <div className="flex items-start gap-4">
+                              <div className="w-5 h-5 rounded-full bg-[#E8552D]/8 flex items-center justify-center shrink-0 mt-0.5">
+                                <CheckCircle
+                                  className="text-[#E8552D]"
+                                  size={12}
+                                  weight="fill"
+                                />
+                              </div>
                               <span className="text-[#52556A] text-sm leading-relaxed">
                                 {detail}
                               </span>
